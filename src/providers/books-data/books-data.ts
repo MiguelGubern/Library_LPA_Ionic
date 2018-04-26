@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class BooksDataProvider {
 
-  apiUrl = 'http://172.20.10.3:3000';
+  apiUrl = 'http://localhost:3000';
 
   constructor(public http: HttpClient) {
     console.log('Hello BooksDataProvider Provider');
