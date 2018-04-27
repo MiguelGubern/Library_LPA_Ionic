@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {BooksDataProvider} from "../../providers/books-data/books-data";
+import {BookPage} from "../book/book";
 
-/**
- * Generated class for the BooksSearchPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,11 +11,41 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class BooksSearchPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  books:any;
+  bookSearch = {name:'', author:'', publisher:'', genre:''}
+
+  genres: any;
+
+
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public bookDataProvider: BooksDataProvider) {
+    this.getAllGenres();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BooksSearchPage');
+  }
+
+  buscar(){
+    console.log(this.bookSearch);
+    this.bookDataProvider.getBooks(this.bookSearch)
+      .then(data => {
+        this.books = data;
+        console.log(this.books);
+      });
+  }
+
+  getAllGenres(){
+    this.bookDataProvider.getAllGenres()
+      .then(data => {
+        this.genres = data;
+        console.log("SIUUUUUU  ", this.genres);
+      })
+  }
+
+  goToBook(book){
+    this.navCtrl.push(BookPage, book);
   }
 
   swipeEvent(e){

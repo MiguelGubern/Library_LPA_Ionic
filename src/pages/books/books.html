@@ -34,10 +34,10 @@
 <ion-content padding>
 
   <div class="divSwipeable" (swipe)="swipeEvent($event)">
-    <div [ngSwitch]="segment">
+    <div [ngSwitch]="segment" (ionChange)="segmentChange()">
 
       <ion-list *ngSwitchCase="'Todos'">
-        <ion-item class="itemListaLibros" *ngFor="let book of booksData" (click)="goToBook(book)">
+        <ion-item class="itemListaLibros" *ngFor="let book of allBooks" (click)="goToBook(book)">
           <ion-thumbnail item-start>
             <img src="{{book.image}}">
           </ion-thumbnail>
@@ -48,9 +48,9 @@
       </ion-list>
 
       <ion-list *ngSwitchCase="'Tendencias'">
-        <ion-item class="itemListaLibros" *ngFor="let book of books" (click)="goToBook(book)">
+        <ion-item class="itemListaLibros" *ngFor="let book of trendyBooks" (click)="goToBook(book)">
           <ion-thumbnail item-start>
-            <img src="{{book.img}}">
+            <img src="{{book.image}}">
           </ion-thumbnail>
           <h2 text-wrap>T {{book.name}}</h2>
           <p text-wrap>{{book.author}}</p>
@@ -59,9 +59,9 @@
       </ion-list>
 
       <ion-list *ngSwitchCase="'Top Rating'">
-        <ion-item class="itemListaLibros" *ngFor="let book of books" (click)="goToBook(book)">
+        <ion-item class="itemListaLibros" *ngFor="let book of topRateBooks" (click)="goToBook(book)">
           <ion-thumbnail item-start>
-            <img src="{{book.img}}">
+            <img src="{{book.image}}">
           </ion-thumbnail>
           <h2 text-wrap>TR {{book.name}}</h2>
           <p text-wrap>{{book.author}}</p>

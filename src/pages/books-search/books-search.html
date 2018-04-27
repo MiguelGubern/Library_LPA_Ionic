@@ -20,16 +20,44 @@
 
 <ion-content padding>
   <div class="divSwipeable" (swipe)="swipeEvent($event)">
-    <ion-card>
-      <ion-title>BOOKS</ion-title>
+
+    <form (ngSubmit)="buscar()">
       <ion-item>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consectetur deleniti dolores eveniet hic
-          iste, nihil numquam officia, quam totam ullam unde. Consequuntur ex explicabo iste quibusdam quis, recusandae
-          temporibus.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consectetur deleniti dolores eveniet hic
-          iste, nihil numquam officia, quam totam ullam unde. Consequuntur ex explicabo iste quibusdam quis, recusandae
-          temporibus.</p>
+        <ion-label>Título</ion-label>
+        <ion-input type="text" [(ngModel)]="bookSearch.name" name="name"></ion-input>
       </ion-item>
-    </ion-card>
+      <ion-item>
+        <ion-label>Autor</ion-label>
+        <ion-input type="text"  [(ngModel)]="bookSearch.author" name="author"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Editorial</ion-label>
+        <ion-input type="text"  [(ngModel)]="bookSearch.publisher" name="publisher"></ion-input>
+      </ion-item>
+      <!--<ion-item>-->
+        <!--<ion-label>ISBN</ion-label>-->
+        <!--<ion-input type="text"  [(ngModel)]="bookSearch.isbn" name="isbn"></ion-input>-->
+      <!--</ion-item>-->
+      <ion-item>
+        <ion-label>Género</ion-label>
+        <ion-select [(ngModel)]="bookSearch.genre" name="genre">
+          <ion-option value=""></ion-option>
+          <ion-option *ngFor="let g of genres" value={{g.name}}>{{g.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <button ion-button type="submit" block>Buscar</button>
+    </form>
+
+    <ion-list>
+      <ion-item class="itemListaLibros" *ngFor="let book of books" (click)="goToBook(book)">
+        <ion-thumbnail item-start>
+          <img src="{{book.image}}">
+        </ion-thumbnail>
+        <h2 text-wrap>T {{book.name}}</h2>
+        <p text-wrap>{{book.author}}</p>
+        <ion-badge item-end>{{book.rate}}/10</ion-badge>
+      </ion-item>
+    </ion-list>
+
   </div>
 </ion-content>
