@@ -18,3 +18,17 @@
 .divSwipeable {
   min-height: 100%;
 }
+
+.toastError {
+  text-align: center;
+  > div{
+    background-color:red!important;
+  }
+}
+
+.toastSuccess {
+  text-align: center;
+  > div{
+    background-color:limegreen!important;
+  }
+}

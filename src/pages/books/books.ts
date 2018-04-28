@@ -49,7 +49,7 @@ export class BooksPage {
       .then(data => {
         this.allBooks = data;
         console.log("SIUUUUUU  ", this.allBooks);
-      })
+      });
   }
 
   getTrendyBooks(){

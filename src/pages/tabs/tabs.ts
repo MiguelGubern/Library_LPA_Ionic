@@ -13,7 +13,6 @@ export class TabsPage {
   tab1 = HomePage;
   tab2 = BooksPage;
   tab3 = BooksSearchPage;
-  tab4 = ChatsPage;
 
   loaded:   boolean = false;
   tabIndex: number  = 0;
@@ -21,7 +20,7 @@ export class TabsPage {
   constructor(private nativePageTransitions: NativePageTransitions) {
   }
 
-
+tabBadge
   private getAnimationDirection(index):string {
     var currentIndex = this.tabIndex;
 

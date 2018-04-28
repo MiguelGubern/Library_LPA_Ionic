@@ -1,11 +1,10 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {ProviderMeta} from "@angular/compiler";
 
 @Injectable()
 export class BooksDataProvider {
 
-  apiUrl = 'http://localhost:3000';
+  apiUrl = 'http://192.168.10.2:3000';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -32,7 +31,20 @@ export class BooksDataProvider {
   //   genre
   //
   // books/searchBooksByISBN
-  //   isbn
+  //   isbn   /books/getLoanAvailabilityByBookId
+
+  getLoanAvailability(bookId) {
+    return new Promise(resolve => {
+      this.http.post(this.apiUrl+'/books/getBookLoanAvailabilityByBookId',
+        "bookId="+bookId,
+        this.httpOptions)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          console.log(err);
+        })
+    })
+  }
 
   getBooks(search){
     return new Promise(resolve => {
@@ -79,15 +91,4 @@ export class BooksDataProvider {
       });
     });
   }
-
-  getAllGenres() {
-    return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/genres/getAllGenres').subscribe(data => {
-        resolve(data);
-      }, err => {
-        console.log(err);
-      });
-    });
-  }
-
 }

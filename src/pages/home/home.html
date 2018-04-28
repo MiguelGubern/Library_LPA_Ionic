@@ -3,8 +3,8 @@
     <ion-title>
       Biblioteca LPA
     </ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only color="royal">
+    <ion-buttons end *ngIf="sessionCtrl.isLogged()">
+      <button ion-button icon-only color="royal" (click)="goToUserProfile()">
         <ion-icon name="person"></ion-icon>
       </button>
     </ion-buttons>
@@ -15,10 +15,17 @@
   <div class="divSwipeable" (swipe)="swipeEvent($event)">
     <img src="assets/imgs/biblio.jpg"/>
     <h1>Bienvenido a la Biblioteca</h1>
-    <button ion-button full>Iniciar sesión</button>
-    <button ion-button full>Regístrate</button>
 
-    <button ion-button full>Buscar  Libros</button>
+    <div *ngIf="!sessionCtrl.isLogged()">
+      <button ion-button full round (click)="goToLogin()" class="homeButtons">Inicia sesión</button>
+      <button ion-button full round (click)="goToSignUp()" class="homeButtons">Regístrate</button>
+    </div>
+
+    <div *ngIf="sessionCtrl.isLogged()">
+      <button ion-button full round (click)="goToChats()" class="homeButtons">Mis Reservas</button>
+      <button ion-button full round (click)="goToChats()" class="homeButtons">Mis Chats</button>
+    </div>
+
   </div>
 
 

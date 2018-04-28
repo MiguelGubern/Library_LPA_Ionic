@@ -15,6 +15,13 @@ import {BooksPage} from "../pages/books/books";
 import {CommentsPage} from "../pages/comments/comments";
 import { BooksDataProvider } from '../providers/books-data/books-data';
 import { HttpClientModule} from "@angular/common/http";
+import { GenresDataProvider } from '../providers/genres-data/genres-data';
+import { AuthServiceProvider } from '../providers/auth-service/auth-service';
+import {LoginPage} from "../pages/login/login";
+import {SignUpPage} from "../pages/sign-up/sign-up";
+import {ConectionErrorPage} from "../pages/conection-error/conection-error";
+import {UserProfilePage} from "../pages/user-profile/user-profile";
+import { SessionControllerProvider } from '../providers/session-controller/session-controller';
 
 @NgModule({
   declarations: [
@@ -25,7 +32,11 @@ import { HttpClientModule} from "@angular/common/http";
     BooksSearchPage,
     ChatsPage,
     CommentsPage,
-    TabsPage
+    TabsPage,
+    LoginPage,
+    SignUpPage,
+    ConectionErrorPage,
+    UserProfilePage
   ],
   imports: [
     BrowserModule,
@@ -42,14 +53,21 @@ import { HttpClientModule} from "@angular/common/http";
     ChatsPage,
     CommentsPage,
     CommentsPage,
-    TabsPage
+    TabsPage,
+    LoginPage,
+    SignUpPage,
+    ConectionErrorPage,
+    UserProfilePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     NativePageTransitions,
-    BooksDataProvider
+    BooksDataProvider,
+    GenresDataProvider,
+    AuthServiceProvider,
+    SessionControllerProvider
   ]
 })
 export class AppModule {}

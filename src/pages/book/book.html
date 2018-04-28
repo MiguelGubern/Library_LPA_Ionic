@@ -21,16 +21,19 @@
     <img src="{{book.image}}" alt="">
   </ion-item>
 
-  <ion-item *ngIf="book.stock > 0">
-    <button ion-button full color="secondary">Reservar</button>
-  </ion-item>
-  <ion-item  *ngIf="book.stock == 0" color="lightYellow">
-    Todos Reservados
-    <button ion-button item-end outline >Ver Usuarios</button>
-  </ion-item>
+  <!--<ion-item *ngIf="availability.loanCount < availability.bookItemsCount">-->
+    <!--<button ion-button full color="secondary">Reservar</button>-->
+  <!--</ion-item>-->
+  <!--<ion-item  *ngIf="availability.loanCount == availability.bookItemsCount" color="lightYellow">-->
+    <!--Todos Reservados-->
+    <!--<button ion-button item-end outline >Ver Usuarios</button>-->
+  <!--</ion-item>-->
 
   <ion-item>
     <h2 text-wrap>Descripción</h2>
+    <p>
+      <button ion-button outline color="dark" *ngFor="let genre of genres">{{genre.name}}</button>
+    </p>
     <p text-wrap>{{book.description}}</p>
   </ion-item>
 
