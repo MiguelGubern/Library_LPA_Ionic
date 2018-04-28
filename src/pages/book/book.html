@@ -21,13 +21,16 @@
     <img src="{{book.image}}" alt="">
   </ion-item>
 
-  <!--<ion-item *ngIf="availability.loanCount < availability.bookItemsCount">-->
-    <!--<button ion-button full color="secondary">Reservar</button>-->
-  <!--</ion-item>-->
-  <!--<ion-item  *ngIf="availability.loanCount == availability.bookItemsCount" color="lightYellow">-->
-    <!--Todos Reservados-->
-    <!--<button ion-button item-end outline >Ver Usuarios</button>-->
-  <!--</ion-item>-->
+  <div *ngIf="sessionCtrl.isLogged()">
+    <ion-item *ngIf="availability.loanCount < availability.bookItemsCount">
+      <button ion-button full color="secondary">Reservar</button>
+    </ion-item>
+    <ion-item  *ngIf="availability.loanCount == availability.bookItemsCount" color="lightYellow">
+      Todos Reservados
+      <button ion-button item-end outline (click)="seeUsers($event)" >Ver Usuarios</button>
+    </ion-item>
+  </div>
+
 
   <ion-item>
     <h2 text-wrap>Descripción</h2>

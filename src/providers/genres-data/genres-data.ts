@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class GenresDataProvider {
 
-  apiUrl = 'http://192.168.10.2:3000';
+  apiUrl = 'http://192.168.1.39:3000';
 
   httpOptions = {
     headers: new HttpHeaders({

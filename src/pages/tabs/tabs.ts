@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {HomePage} from "../home/home";
 import {BooksSearchPage} from "../books-search/books-search";
-import {ChatsPage} from "../chats/chats";
 import {BooksPage} from "../books/books";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 

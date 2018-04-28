@@ -5,6 +5,7 @@ import {SignUpPage} from "../sign-up/sign-up";
 import {UserProfilePage} from "../user-profile/user-profile";
 import {SessionControllerProvider} from "../../providers/session-controller/session-controller";
 import {ChatsPage} from "../chats/chats";
+import {MyLoansPage} from "../my-loans/my-loans";
 
 @Component({
   selector: 'page-home',
@@ -57,9 +58,14 @@ export class HomePage {
     this.navCtrl.push(SignUpPage);
   }
 
-  goToUserProfile(){
+  goToUserProfile() {
     this.navCtrl.push(UserProfilePage);
   }
+
+  goToMyLoans(){
+    this.navCtrl.push(MyLoansPage);
+  }
+
 }
 
 

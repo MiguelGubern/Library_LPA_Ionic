@@ -22,6 +22,8 @@ import {SignUpPage} from "../pages/sign-up/sign-up";
 import {ConectionErrorPage} from "../pages/conection-error/conection-error";
 import {UserProfilePage} from "../pages/user-profile/user-profile";
 import { SessionControllerProvider } from '../providers/session-controller/session-controller';
+import {UsersPopoverPage} from "../pages/users-popover/users-popover";
+import {MyLoansPage} from "../pages/my-loans/my-loans";
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { SessionControllerProvider } from '../providers/session-controller/sessi
     LoginPage,
     SignUpPage,
     ConectionErrorPage,
-    UserProfilePage
+    UserProfilePage,
+    UsersPopoverPage,
+    MyLoansPage
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,9 @@ import { SessionControllerProvider } from '../providers/session-controller/sessi
     LoginPage,
     SignUpPage,
     ConectionErrorPage,
-    UserProfilePage
+    UserProfilePage,
+    UsersPopoverPage,
+    MyLoansPage
   ],
   providers: [
     StatusBar,

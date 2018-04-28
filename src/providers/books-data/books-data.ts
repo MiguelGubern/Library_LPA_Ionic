@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class BooksDataProvider {
 
-  apiUrl = 'http://192.168.10.2:3000';
+  apiUrl = 'http://192.168.1.39:3000';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -33,9 +33,37 @@ export class BooksDataProvider {
   // books/searchBooksByISBN
   //   isbn   /books/getLoanAvailabilityByBookId
 
+
+  getAllUserLoans(userId){
+    return new Promise(resolve => {
+        this.http.post(this.apiUrl+'/people/getAllUserLoans',
+          "userId="+ userId,
+          this.httpOptions)
+          .subscribe(data => {
+            resolve(data);
+          }, (err) => {
+            console.log(err);
+          })
+      })
+
+  }
+
   getLoanAvailability(bookId) {
     return new Promise(resolve => {
       this.http.post(this.apiUrl+'/books/getBookLoanAvailabilityByBookId',
+        "bookId="+bookId,
+        this.httpOptions)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          console.log(err);
+        })
+    })
+  }
+
+  getAllUsersWithLoan(bookId) {
+    return new Promise(resolve => {
+      this.http.post(this.apiUrl+'/books/getAllUsersWithLoanByBookId',
         "bookId="+bookId,
         this.httpOptions)
         .subscribe(data => {

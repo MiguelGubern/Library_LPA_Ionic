@@ -12,7 +12,7 @@ import {Md5} from 'ts-md5/dist/md5';
 @Injectable()
 export class AuthServiceProvider {
 
-  apiUrl = 'http://192.168.10.2:3000';
+  apiUrl = 'http://192.168.1.39:3000';
 
   httpOptions = {
     headers: new HttpHeaders({

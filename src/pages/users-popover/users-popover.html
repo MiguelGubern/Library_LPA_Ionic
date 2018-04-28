@@ -1,0 +1,8 @@
+<ion-list>
+  <ion-item *ngFor="let user of users">
+    <ion-avatar item-start>
+      <img src="{{user.picture}}">
+    </ion-avatar>
+    <p>{{user.name}}</p>
+  </ion-item>
+</ion-list>
