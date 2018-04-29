@@ -15,8 +15,37 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item>
+    <ion-item *ngFor="let loan of loans" (click)="presentActionSheet(loan)">
+      <ion-grid>
+        <ion-row text-center>
+          <ion-col col-8>
+            <h2 text-wrap>{{loan.book.name}}</h2>
+            <h3 text-wrap>{{loan.book.author}}</h3>
+          </ion-col>
+          <ion-col col-4>
 
+            <ion-item *ngIf="loan.daysLeft <= 0" class="alertTimeLeft" >
+              <h3 text-wrap>Urgente devolución</h3>
+            </ion-item>
+
+            <ion-item *ngIf="loan.daysLeft == 1" class="warningTimeLeft">
+              <p>Te quedan:</p>
+              <h3>{{loan.daysLeft}} día</h3>
+            </ion-item>
+
+            <ion-item *ngIf="loan.daysLeft == 2" class="softWarningTimeLeft">
+              <p>Te quedan:</p>
+              <h3>{{loan.daysLeft}} días</h3>
+            </ion-item>
+
+            <ion-item *ngIf="loan.daysLeft > 2">
+              <p>Te quedan:</p>
+              <h3>{{loan.daysLeft}} días</h3>
+            </ion-item>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -1,6 +1,7 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Md5} from 'ts-md5/dist/md5';
+import {apiUrl} from "../../app/app.module";
 
 
 /*
@@ -11,8 +12,6 @@ import {Md5} from 'ts-md5/dist/md5';
 */
 @Injectable()
 export class AuthServiceProvider {
-
-  apiUrl = 'http://192.168.1.39:3000';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -38,7 +37,7 @@ export class AuthServiceProvider {
 
   createUser(userData){
     return new Promise( resolve => {
-      this.http.post(this.apiUrl + '/people/register',
+      this.http.post(apiUrl + '/people/register',
         "email="+userData.email+
               "&name="+userData.name+
               "&password="+Md5.hashStr(userData.password),
@@ -53,7 +52,7 @@ export class AuthServiceProvider {
 
   login(userData){
     return new Promise( resolve => {
-      this.http.post(this.apiUrl + '/people/log_in',
+      this.http.post(apiUrl + '/people/log_in',
         "email="+userData.email+
         "&password="+ Md5.hashStr(userData.password),
         this.httpOptions)

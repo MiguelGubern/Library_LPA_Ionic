@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {BookPage} from "../book/book";
 import {BooksDataProvider} from "../../providers/books-data/books-data";
+import {UserProfilePage} from "../user-profile/user-profile";
+import {SessionControllerProvider} from "../../providers/session-controller/session-controller";
 
 @IonicPage()
 @Component({
@@ -18,7 +20,8 @@ export class BooksPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public booksDataProvider: BooksDataProvider,
-              private loading: LoadingController) {
+              private loading: LoadingController,
+              private sessionCtrl: SessionControllerProvider) {
 
 
     let loader = this.loading.create({
@@ -84,7 +87,9 @@ export class BooksPage {
     }
   }
 
-
+  goToUserProfile(){
+    this.navCtrl.push(UserProfilePage);
+  }
 
   goToBook(book){
     this.navCtrl.push(BookPage, book);

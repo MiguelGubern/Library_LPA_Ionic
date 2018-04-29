@@ -22,13 +22,21 @@
   </ion-item>
 
   <div *ngIf="sessionCtrl.isLogged()">
-    <ion-item *ngIf="availability.loanCount < availability.bookItemsCount">
+
+    <ion-item *ngIf="availability.loanCount < availability.bookItemsCount && availability.gotIt == 0">
       <button ion-button full color="secondary">Reservar</button>
     </ion-item>
-    <ion-item  *ngIf="availability.loanCount == availability.bookItemsCount" color="lightYellow">
+
+    <ion-item  *ngIf="availability.loanCount == availability.bookItemsCount && availability.gotIt == 0" color="lightYellow">
       Todos Reservados
       <button ion-button item-end outline (click)="seeUsers($event)" >Ver Usuarios</button>
     </ion-item>
+
+    <ion-item  *ngIf="availability.gotIt == 1" color="secundary">
+      Libro alquilado
+      <button ion-button item-end outline (click)="goToMyLoans()" >Mis Alquileres</button>
+    </ion-item>
+
   </div>
 
 

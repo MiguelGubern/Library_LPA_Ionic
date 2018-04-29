@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {BooksDataProvider} from "../../providers/books-data/books-data";
 import {BookPage} from "../book/book";
 import {GenresDataProvider} from "../../providers/genres-data/genres-data";
+import {UserProfilePage} from "../user-profile/user-profile";
+import {SessionControllerProvider} from "../../providers/session-controller/session-controller";
 
 
 @IonicPage()
@@ -21,7 +23,8 @@ export class BooksSearchPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public bookDataProvider: BooksDataProvider,
-              public genresDataProvider: GenresDataProvider) {
+              public genresDataProvider: GenresDataProvider,
+              private sessionCtrl:SessionControllerProvider) {
     this.getAllGenres();
   }
 
@@ -50,9 +53,16 @@ export class BooksSearchPage {
     this.navCtrl.push(BookPage, book);
   }
 
+
+  goToUserProfile(){
+    this.navCtrl.push(UserProfilePage);
+  }
+
   swipeEvent(e){
     if(e.direction == '4'){
       this.navCtrl.parent.select(1)
     }
   }
+
+
 }

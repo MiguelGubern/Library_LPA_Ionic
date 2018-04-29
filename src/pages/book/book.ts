@@ -4,6 +4,7 @@ import {GenresDataProvider} from "../../providers/genres-data/genres-data";
 import {BooksDataProvider} from "../../providers/books-data/books-data";
 import {UsersPopoverPage} from "../users-popover/users-popover";
 import {SessionControllerProvider} from "../../providers/session-controller/session-controller";
+import {MyLoansPage} from "../my-loans/my-loans";
 
 /**
  * Generated class for the BookPage page.
@@ -21,7 +22,7 @@ export class BookPage {
 
   book: any;
   genres: any;
-  availability = {loanCount: 0, bookItemsCount: 0};
+  availability = {loanCount: 0, bookItemsCount: 0, gotIt: 0};
 
   /** Peticiones pendientes
    *    /books/getLoanAvailabilityByBookId => {loanCount:num, bookItemsCount:num}
@@ -40,7 +41,9 @@ export class BookPage {
               private sessionCtrl: SessionControllerProvider) {
     this.book = navParams.data;
     this.getBookGenres();
-    this.getLoanAvailability();
+    if (sessionCtrl.isLogged()){
+      this.getLoanAvailability();
+    }
   }
 
   ionViewDidLoad() {
@@ -56,7 +59,7 @@ export class BookPage {
   }
 
   getLoanAvailability(){
-    this.booksData.getLoanAvailability(this.book.id)
+    this.booksData.getLoanAvailability(this.book.id, this.sessionCtrl.getUser().id)
       .then(data => {
         this.availability = JSON.parse(JSON.stringify(data));
         console.log("asd", this.availability);
@@ -69,4 +72,7 @@ export class BookPage {
     });
   }
 
+  goToMyLoans(){
+    this.navCtrl.push(MyLoansPage);
+  }
 }

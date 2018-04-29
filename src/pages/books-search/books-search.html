@@ -8,8 +8,8 @@
 
   <ion-navbar>
     <ion-title>booksSearch</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only color="royal">
+    <ion-buttons end *ngIf="sessionCtrl.isLogged()">
+      <button ion-button icon-only color="royal" (click)="goToUserProfile()">
         <ion-icon name="person"></ion-icon>
       </button>
     </ion-buttons>

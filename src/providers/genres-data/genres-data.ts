@@ -1,5 +1,6 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {apiUrl} from "../../app/app.module";
 
 /*
   Generated class for the GenresDataProvider provider.
@@ -9,8 +10,6 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class GenresDataProvider {
-
-  apiUrl = 'http://192.168.1.39:3000';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -24,7 +23,7 @@ export class GenresDataProvider {
 
   getAllGenres() {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/genres/getAllGenres').subscribe(data => {
+      this.http.get(apiUrl + '/genres/getAllGenres').subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
@@ -34,7 +33,7 @@ export class GenresDataProvider {
 
   getBookGenres(bookId){
     return new Promise(resolve => {
-      this.http.post(this.apiUrl+'/books/getGenresOfBookByBookId', "id="+bookId, this.httpOptions)
+      this.http.post(apiUrl+'/books/getGenresOfBookByBookId', "id="+bookId, this.httpOptions)
         .subscribe(data => {
           resolve(data);
         }, (err) => {

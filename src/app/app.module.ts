@@ -25,6 +25,9 @@ import { SessionControllerProvider } from '../providers/session-controller/sessi
 import {UsersPopoverPage} from "../pages/users-popover/users-popover";
 import {MyLoansPage} from "../pages/my-loans/my-loans";
 
+
+export const apiUrl = 'http://192.168.10.2:3000';
+
 @NgModule({
   declarations: [
     MyApp,

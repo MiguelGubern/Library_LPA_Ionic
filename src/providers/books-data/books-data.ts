@@ -1,10 +1,9 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {apiUrl} from "../../app/app.module";
 
 @Injectable()
 export class BooksDataProvider {
-
-  apiUrl = 'http://192.168.1.39:3000';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -34,24 +33,79 @@ export class BooksDataProvider {
   //   isbn   /books/getLoanAvailabilityByBookId
 
 
-  getAllUserLoans(userId){
+  getBookLoansAndBook(userId){
     return new Promise(resolve => {
-        this.http.post(this.apiUrl+'/people/getAllUserLoans',
-          "userId="+ userId,
-          this.httpOptions)
-          .subscribe(data => {
-            resolve(data);
-          }, (err) => {
-            console.log(err);
-          })
-      })
-
+          this.http.post(apiUrl+'/people/getBookLoansAndBookByUserId',
+            "userId="+ userId,
+            this.httpOptions)
+            .subscribe(data => {
+              resolve(data);
+            }, (err) => {
+              console.log(err);
+            })
+        })
   }
 
-  getLoanAvailability(bookId) {
+
+  // getBookByBookLoanId(loanId){
+  //   return new Promise(resolve => {
+  //     this.http.post(apiUrl+'/book_loans/getBookByBookLoanId',
+  //       "bookLoanId="+ loanId,
+  //       this.httpOptions)
+  //       .subscribe(data => {
+  //         resolve(data);
+  //       }, (err) => {
+  //         console.log(err);
+  //       })
+  //   })
+  // }
+  //
+  // getDaysLeft(loanId){
+  //   return new Promise(resolve => {
+  //     this.http.post(apiUrl+'/book_loans/getDaysLeftByBookLoan',
+  //       "bookLoanId="+ loanId,
+  //       this.httpOptions)
+  //       .subscribe(data => {
+  //         resolve(data);
+  //       }, (err) => {
+  //         console.log(err);
+  //       })
+  //   })
+  // }
+  //
+  //
+  // getAllUserLoans(userId){
+  //   return new Promise(resolve => {
+  //       this.http.post(apiUrl+'/people/getAllUserLoans',
+  //         "userId="+ userId,
+  //         this.httpOptions)
+  //         .subscribe(data => {
+  //           resolve(data);
+  //         }, (err) => {
+  //           console.log(err);
+  //         })
+  //     })
+  //
+  // }
+
+  returnLoan(loanId){
     return new Promise(resolve => {
-      this.http.post(this.apiUrl+'/books/getBookLoanAvailabilityByBookId',
-        "bookId="+bookId,
+      this.http.post(apiUrl+'/book_loans/returnBookLoanByBookLoanId',
+        "bookLoanId="+loanId,
+        this.httpOptions)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          console.log(err);
+        })
+    })
+  }
+
+  getLoanAvailability(bookId, userId) {
+    return new Promise(resolve => {
+      this.http.post(apiUrl+'/books/getAvailabilityByBookIdAndUserId',
+        "bookId="+bookId +
+              "&userId="+userId,
         this.httpOptions)
         .subscribe(data => {
           resolve(data);
@@ -63,7 +117,7 @@ export class BooksDataProvider {
 
   getAllUsersWithLoan(bookId) {
     return new Promise(resolve => {
-      this.http.post(this.apiUrl+'/books/getAllUsersWithLoanByBookId',
+      this.http.post(apiUrl+'/books/getAllUsersWithLoanByBookId',
         "bookId="+bookId,
         this.httpOptions)
         .subscribe(data => {
@@ -76,7 +130,7 @@ export class BooksDataProvider {
 
   getBooks(search){
     return new Promise(resolve => {
-      this.http.post(this.apiUrl+'/books/searchBooks',
+      this.http.post(apiUrl+'/books/searchBooks',
           "name="+search.name+
           "&author="+search. author+
           "&publisher="+search.publisher+
@@ -92,7 +146,7 @@ export class BooksDataProvider {
 
   getAllBooks(){
     return new Promise( resolve => {
-      this.http.get(this.apiUrl + '/books/getAllBooks').subscribe(data => {
+      this.http.get(apiUrl + '/books/getAllBooks').subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
@@ -102,7 +156,7 @@ export class BooksDataProvider {
 
   getTrendyBooks(){
     return new Promise( resolve => {
-      this.http.get(this.apiUrl + '/books/getTrendingBooks').subscribe(data => {
+      this.http.get(apiUrl + '/books/getTrendingBooks').subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
@@ -112,7 +166,7 @@ export class BooksDataProvider {
 
   getTopRateBooks(){
     return new Promise( resolve => {
-      this.http.get(this.apiUrl + '/books/getTopRatedBooks').subscribe(data => {
+      this.http.get(apiUrl + '/books/getTopRatedBooks').subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);

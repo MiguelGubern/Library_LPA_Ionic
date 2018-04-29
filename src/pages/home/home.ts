@@ -20,7 +20,7 @@ export class HomePage {
   ];
 
   constructor(public navCtrl:NavController,
-              public sessionCtrl:SessionControllerProvider) {
+              private sessionCtrl:SessionControllerProvider) {
   }
 
   ionViewDidLoad(){
