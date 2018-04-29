@@ -13,8 +13,15 @@
 
 <ion-content padding>
   <div class="divSwipeable" (swipe)="swipeEvent($event)">
-    <img src="assets/imgs/biblio.jpg"/>
-    <h1>Bienvenido a la Biblioteca</h1>
+    <ion-item text-center>
+      <img src="assets/imgs/biblio.jpg"/>
+    </ion-item>
+
+    <ion-item text-center>
+      <h1>Bienvenido a la Biblioteca</h1>
+    </ion-item>
+
+
 
     <div *ngIf="!sessionCtrl.isLogged()">
       <button ion-button full round (click)="goToLogin()" class="homeButtons">Inicia sesión</button>

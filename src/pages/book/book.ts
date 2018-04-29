@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, PopoverController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, PopoverController, ToastController} from 'ionic-angular';
 import {GenresDataProvider} from "../../providers/genres-data/genres-data";
 import {BooksDataProvider} from "../../providers/books-data/books-data";
 import {UsersPopoverPage} from "../users-popover/users-popover";
 import {SessionControllerProvider} from "../../providers/session-controller/session-controller";
 import {MyLoansPage} from "../my-loans/my-loans";
+import {BookLoansDataProvider} from "../../providers/book-loans-data/book-loans-data";
 
 /**
  * Generated class for the BookPage page.
@@ -35,10 +36,12 @@ export class BookPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              public genresDataProvider: GenresDataProvider,
-              public booksData: BooksDataProvider,
+              private genresDataProvider: GenresDataProvider,
+              private booksData: BooksDataProvider,
+              private bookLoansData: BookLoansDataProvider,
               private popoverCtrl: PopoverController,
-              private sessionCtrl: SessionControllerProvider) {
+              private sessionCtrl: SessionControllerProvider,
+              private toastCtrl: ToastController) {
     this.book = navParams.data;
     this.getBookGenres();
     if (sessionCtrl.isLogged()){
@@ -59,10 +62,26 @@ export class BookPage {
   }
 
   getLoanAvailability(){
-    this.booksData.getLoanAvailability(this.book.id, this.sessionCtrl.getUser().id)
+    this.bookLoansData.getLoanAvailability(this.book.id, this.sessionCtrl.getUser().id)
       .then(data => {
         this.availability = JSON.parse(JSON.stringify(data));
         console.log("asd", this.availability);
+      })
+  }
+
+
+  createBookLoan() {
+    this.bookLoansData.createBookLoan(this.book.id, this.sessionCtrl.getUser().id)
+      .then(data => {
+        let response: any;
+        response = data;
+        this.toastCtrl.create({
+          message: response.message,
+          duration: 3000,
+          position: "top"
+        })
+          .present();
+        this.getLoanAvailability();
       })
   }
 

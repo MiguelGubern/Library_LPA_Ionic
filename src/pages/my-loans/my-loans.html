@@ -16,36 +16,30 @@
 <ion-content padding>
   <ion-list>
     <ion-item *ngFor="let loan of loans" (click)="presentActionSheet(loan)">
-      <ion-grid>
-        <ion-row text-center>
-          <ion-col col-8>
-            <h2 text-wrap>{{loan.book.name}}</h2>
-            <h3 text-wrap>{{loan.book.author}}</h3>
-          </ion-col>
-          <ion-col col-4>
 
-            <ion-item *ngIf="loan.daysLeft <= 0" class="alertTimeLeft" >
-              <h3 text-wrap>Urgente devolución</h3>
-            </ion-item>
+        <ion-thumbnail item-start>
+          <img src="{{loan.book.image}}">
+        </ion-thumbnail>
+        <h2 text-wrap text-center>{{loan.book.name}}</h2>
+        <p text-wrap text-center>{{loan.book.author}}</p>
 
-            <ion-item *ngIf="loan.daysLeft == 1" class="warningTimeLeft">
-              <p>Te quedan:</p>
-              <h3>{{loan.daysLeft}} día</h3>
-            </ion-item>
+        <ion-badge item-end *ngIf="loan.daysLeft <= 0" class="alertTimeLeft">
+          <h3 text-wrap text-center>Urgente <br> devolución</h3>
+        </ion-badge>
 
-            <ion-item *ngIf="loan.daysLeft == 2" class="softWarningTimeLeft">
-              <p>Te quedan:</p>
-              <h3>{{loan.daysLeft}} días</h3>
-            </ion-item>
+        <ion-badge item-end *ngIf="loan.daysLeft == 1" class="warningTimeLeft">
+          <h3 text-center>{{loan.daysLeft}} día<br> restantes</h3>
+        </ion-badge>
 
-            <ion-item *ngIf="loan.daysLeft > 2">
-              <p>Te quedan:</p>
-              <h3>{{loan.daysLeft}} días</h3>
-            </ion-item>
+        <ion-badge item-end *ngIf="loan.daysLeft == 2" class="warningTimeLeft">
+          <h3 text-center>{{loan.daysLeft}} días<br> restantes</h3>
+        </ion-badge>
 
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+        <ion-badge item-end *ngIf="loan.daysLeft > 2" color="secondary">
+          <h3 text-center>{{loan.daysLeft}} días <br> restantes</h3>
+        </ion-badge>
+
+
     </ion-item>
   </ion-list>
 </ion-content>

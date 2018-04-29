@@ -9,25 +9,26 @@
   <ion-navbar>
     <ion-title>Chats</ion-title>
 
-    <ion-buttons end>
-      <button ion-button icon-only color="royal">
-        <ion-icon name="person"></ion-icon>
-      </button>
-    </ion-buttons>
+
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
   <div class="divSwipeable" (swipe)="swipeEvent($event)">
-    <ion-card>
-      <ion-title>CHATS</ion-title>
-      <ion-item>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consectetur deleniti dolores eveniet hic
-          iste, nihil numquam officia, quam totam ullam unde. Consequuntur ex explicabo iste quibusdam quis, recusandae
-          temporibus.</p>
+    <ion-item>
+      <h2 *ngIf="!chats">No hay chats disponibles</h2>
+      <h2 *ngIf="chats">Lista de chats</h2>
+    </ion-item>
+
+    <ion-list>
+      <ion-item *ngFor="let chat of chats" (click)="goToChat(chat)">
+        <ion-avatar item-start>
+          <img src="{{chat.toUser.picture}}">
+        </ion-avatar>
+        <h2>{{chat.toUser.name}}</h2>
+        <ion-icon name="arrow-dropright-circle" item-end></ion-icon>
       </ion-item>
-    </ion-card>
+    </ion-list>
   </div>
 </ion-content>

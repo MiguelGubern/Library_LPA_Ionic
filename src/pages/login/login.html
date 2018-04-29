@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Login</ion-title>
+    <ion-title>Iniciar sesión</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,7 +16,7 @@
   <form (ngSubmit)="login()">
     <ion-item>
       <ion-label>E-mail:</ion-label>
-      <ion-input type="text" [(ngModel)]="user.email" name="email"></ion-input>
+      <ion-input type="email" [(ngModel)]="user.email" name="email"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Contraseña</ion-label>

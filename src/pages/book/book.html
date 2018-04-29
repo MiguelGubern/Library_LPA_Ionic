@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Book</ion-title>
+    <ion-title>Vista de Libro</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -24,7 +24,7 @@
   <div *ngIf="sessionCtrl.isLogged()">
 
     <ion-item *ngIf="availability.loanCount < availability.bookItemsCount && availability.gotIt == 0">
-      <button ion-button full color="secondary">Reservar</button>
+      <button ion-button full color="secondary" (click)="createBookLoan()">Alquilar</button>
     </ion-item>
 
     <ion-item  *ngIf="availability.loanCount == availability.bookItemsCount && availability.gotIt == 0" color="lightYellow">
@@ -45,7 +45,7 @@
     <p>
       <button ion-button outline color="dark" *ngFor="let genre of genres">{{genre.name}}</button>
     </p>
-    <p text-wrap>{{book.description}}</p>
+    <p text-wrap>Editorial: {{book.publisher}} <br> {{book.description}}</p>
   </ion-item>
 
   <ion-item>

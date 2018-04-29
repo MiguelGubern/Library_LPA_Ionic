@@ -10,6 +10,7 @@ import {
 import {BooksDataProvider} from "../../providers/books-data/books-data";
 import {SessionControllerProvider} from "../../providers/session-controller/session-controller";
 import {BookPage} from "../book/book";
+import {BookLoansDataProvider} from "../../providers/book-loans-data/book-loans-data";
 
 /**
  * Generated class for the MyLoansPage page.
@@ -30,6 +31,7 @@ export class MyLoansPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private booksData: BooksDataProvider,
+              private bookLoansData: BookLoansDataProvider,
               private sessionCtrl: SessionControllerProvider,
               private actionSheet: ActionSheetController,
               private alertCtrl: AlertController,
@@ -42,9 +44,9 @@ export class MyLoansPage {
     console.log('ionViewDidLoad MyLoansPage');
   }
 
-  getLoansInfo(){
-    this.booksData.getBookLoansAndBook(this.sessionCtrl.getUser().id)
-      .then( data => {
+  getLoansInfo() {
+    this.bookLoansData.getBookLoansAndBook(this.sessionCtrl.getUser().id)
+      .then(data => {
         this.loans = data;
         console.log(this.loans);
       });
@@ -52,7 +54,7 @@ export class MyLoansPage {
 
   presentActionSheet(loan) {
     let actionSheet = this.actionSheet.create({
-      title: 'Alquiler: '+ loan.book.name,
+      title: 'Alquiler: ' + loan.book.name,
       buttons: [
         {
           text: 'Devolver libro',
@@ -61,12 +63,12 @@ export class MyLoansPage {
             this.showConfirm(loan);
             console.log('Dclicked');
           }
-        },{
+        }, {
           text: "Ir al libro",
           handler: () => {
             this.goToBook(loan.book);
           }
-        },{
+        }, {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
@@ -99,56 +101,22 @@ export class MyLoansPage {
     confirm.present();
   }
 
-  returnLoan(loan){
-    this.booksData.returnLoan(loan.bookLoanId)
-      .then( data => {
+  returnLoan(loan) {
+    this.bookLoansData.returnLoan(loan.bookLoanId)
+      .then(data => {
         let response: any;
         response = data;
-        this.toasstCtrl.create({message: response.message,
+        this.toasstCtrl.create({
+          message: response.message,
           duration: 3000,
-          position: "top"})
+          position: "top"
+        })
           .present();
         this.getLoansInfo();
       })
   }
 
-  goToBook(book){
+  goToBook(book) {
     this.navCtrl.push(BookPage, book);
   }
-
-
-  // getAllUserLoans(){
-  //     this.booksData.getAllUserLoans(this.sessionCtrl.getUser().id)
-  //       .then(data => {
-  //         this.loans = data;
-  //         console.log(this.loans);
-  //         this.createLoan();
-  //       });
-  // }
-
-  // getBookByLoanId(loanId){
-  //   this.booksData.getBookByBookLoanId(loanId)
-  //     .then(data => {
-  //       console.log("GETBOOKBYLOANID", data);
-  //     });
-  // }
-
-  // getTimeLeftOfLoan(loanId){
-  //   // HAY QUE HACER EL GETBOOKBYLOANID EN SERVER Y BOOKSDATAPROVIDER
-  //   this.booksData.getAllUserLoans(this.sessionCtrl.getUser().id)
-  //     .then(data => {
-  //       console.log(data);
-  //       return data;
-  //     });
-  // }
-
-//   createLoan(){
-//     for(let loan of this.loans){
-//       loan["book"] = this.getBookByLoanId(loan.id);
-//
-//
-//       // loan["timeLeft"] = this.getTimeLeftOfLoan(loan.id);
-//     }
-//     console.log("CREATE LOANS: ", this.loans);
-//   }
 }

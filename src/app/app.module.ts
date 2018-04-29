@@ -24,6 +24,9 @@ import {UserProfilePage} from "../pages/user-profile/user-profile";
 import { SessionControllerProvider } from '../providers/session-controller/session-controller';
 import {UsersPopoverPage} from "../pages/users-popover/users-popover";
 import {MyLoansPage} from "../pages/my-loans/my-loans";
+import { BookLoansDataProvider } from '../providers/book-loans-data/book-loans-data';
+import { ChatsDataProvider } from '../providers/chats-data/chats-data';
+import {ChatPage} from "../pages/chat/chat";
 
 
 export const apiUrl = 'http://192.168.10.2:3000';
@@ -43,7 +46,8 @@ export const apiUrl = 'http://192.168.10.2:3000';
     ConectionErrorPage,
     UserProfilePage,
     UsersPopoverPage,
-    MyLoansPage
+    MyLoansPage,
+    ChatPage
   ],
   imports: [
     BrowserModule,
@@ -66,7 +70,8 @@ export const apiUrl = 'http://192.168.10.2:3000';
     ConectionErrorPage,
     UserProfilePage,
     UsersPopoverPage,
-    MyLoansPage
+    MyLoansPage,
+    ChatPage
   ],
   providers: [
     StatusBar,
@@ -76,7 +81,9 @@ export const apiUrl = 'http://192.168.10.2:3000';
     BooksDataProvider,
     GenresDataProvider,
     AuthServiceProvider,
-    SessionControllerProvider
+    SessionControllerProvider,
+    BookLoansDataProvider,
+    ChatsDataProvider
   ]
 })
 export class AppModule {}

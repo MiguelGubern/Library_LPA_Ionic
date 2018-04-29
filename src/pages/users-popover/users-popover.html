@@ -1,5 +1,5 @@
 <ion-list>
-  <ion-item *ngFor="let user of users">
+  <ion-item *ngFor="let user of users" (click)="showConfirm(user)">
     <ion-avatar item-start>
       <img src="{{user.picture}}">
     </ion-avatar>
